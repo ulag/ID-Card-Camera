@@ -101,7 +101,9 @@ class ObjectDetectionSessionHandler: NSObject, AVCaptureVideoDataOutputSampleBuf
         
         session.commitConfiguration()
         
-        session.startRunning()
+        DispatchQueue.global(qos: .userInitiated).async { //[weak self] in
+          self.session.startRunning()
+        }
     }
     
     func stopCamera() {
